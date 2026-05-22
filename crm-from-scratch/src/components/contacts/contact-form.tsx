@@ -72,8 +72,10 @@ export function ContactForm({ action, initial, submitLabel = "Save", onSuccess }
         <div className="space-y-2">
           <Label htmlFor="status">Status</Label>
           <Select name="status" defaultValue={(initial?.status as ContactStatus) ?? "lead"}>
-            <SelectTrigger id="status">
-              <SelectValue />
+            <SelectTrigger id="status" className="w-full">
+              <SelectValue>
+                {(v) => STATUS_LABEL[v as ContactStatus] ?? "—"}
+              </SelectValue>
             </SelectTrigger>
             <SelectContent>
               {(Object.keys(STATUS_LABEL) as ContactStatus[]).map((s) => (

@@ -69,8 +69,10 @@ export function DealForm({ action, initial, contacts, submitLabel = "Save", onSu
         <div className="space-y-2">
           <Label htmlFor="stage">Stage</Label>
           <Select name="stage" defaultValue={(initial?.stage as DealStage) ?? "lead"}>
-            <SelectTrigger id="stage">
-              <SelectValue />
+            <SelectTrigger id="stage" className="w-full">
+              <SelectValue>
+                {(v) => STAGES.find((s) => s.key === v)?.label ?? "—"}
+              </SelectValue>
             </SelectTrigger>
             <SelectContent>
               {STAGES.map((s) => (
@@ -95,8 +97,14 @@ export function DealForm({ action, initial, contacts, submitLabel = "Save", onSu
       <div className="space-y-2">
         <Label htmlFor="contact_id">Contact</Label>
         <Select name="contact_id" defaultValue={initial?.contact_id ?? "none"}>
-          <SelectTrigger id="contact_id">
-            <SelectValue />
+          <SelectTrigger id="contact_id" className="w-full">
+            <SelectValue>
+              {(v) => {
+                if (!v || v === "none") return "— No contact —";
+                const c = contacts.find((x) => x.id === v);
+                return c ? `${c.first_name} ${c.last_name ?? ""}`.trim() : "— No contact —";
+              }}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="none">— No contact —</SelectItem>

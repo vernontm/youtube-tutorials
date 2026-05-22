@@ -42,7 +42,7 @@ export function EditDealDialog({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={trigger} />
+      <DialogTrigger nativeButton={false} render={trigger} />
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>Edit deal</DialogTitle>
